@@ -99,6 +99,16 @@ public class Settings extends Configuration {
     private boolean hideDeathMessage = false;
     @Comment("Миры в котором плагин не работает")
     private List<String> disabledWorlds = Arrays.asList("world1", "world2");
+    @Comment("Отменять попытки наказать игроков во время их боя? Игнорируется операторами и наличием права antirelog.punishmentbypass")
+    @ConfigKey("disable-punishment-during-pvp")
+    private boolean disablePunishmentDuringPvp = true;
+    @Comment("Сообщение игроку, который пытался наказать")
+    @ConfigKey("punishment-failed-message")
+    private String punishmentFailedMessage = "&cНельзя наказать игрока, пока он в бою.";
+    @Comment({"Оповещение о провалившейся попытке наказать. Показывается только игрокам с правом antirelog.failpunishment.report",
+            "%player% - игрок, который пытался наказать, %command% - команда, %punished% - игрок, к которому применялось наказание"})
+    @ConfigKey("punishment-failed-broadcast")
+    private String punishmentFailedBroadcast = "&cИгрок %player% пытался наказать игрока %punished% с помощью команды %command%";
 
     public Settings(ConfigurationProvider provider) {
         super(provider);
@@ -236,6 +246,21 @@ public class Settings extends Configuration {
             ", hideLeaveMessage=" + hideLeaveMessage +
             ", hideDeathMessage=" + hideDeathMessage +
             ", disabledWorlds=" + disabledWorlds +
+            ", disablePunishmentDuringPvp=" + disablePunishmentDuringPvp +
+            ", punishmentFailedMessage=" + punishmentFailedMessage +
+            ", punishmentFailedBroadcast=" + punishmentFailedBroadcast +
             '}';
+    }
+
+    public boolean isDisablePunishmentDuringPvp() {
+        return disablePunishmentDuringPvp;
+    }
+
+    public String getPunishmentFailedMessage() {
+        return punishmentFailedMessage;
+    }
+
+    public String getPunishmentFailedBroadcast() {
+        return punishmentFailedBroadcast;
     }
 }

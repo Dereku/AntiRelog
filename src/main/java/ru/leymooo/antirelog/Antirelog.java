@@ -8,10 +8,7 @@ import org.codemc.worldguardwrapper.WorldGuardWrapper;
 import ru.leymooo.annotatedyaml.ConfigurationProvider;
 import ru.leymooo.annotatedyaml.provider.BukkitConfigurationProvider;
 import ru.leymooo.antirelog.config.Settings;
-import ru.leymooo.antirelog.listeners.CooldownListener;
-import ru.leymooo.antirelog.listeners.EssentialsTeleportListener;
-import ru.leymooo.antirelog.listeners.PvPListener;
-import ru.leymooo.antirelog.listeners.WorldGuardListener;
+import ru.leymooo.antirelog.listeners.*;
 import ru.leymooo.antirelog.manager.BossbarManager;
 import ru.leymooo.antirelog.manager.CooldownManager;
 import ru.leymooo.antirelog.manager.PowerUpsManager;
@@ -46,6 +43,7 @@ public class Antirelog extends JavaPlugin {
         detectPlugins();
         getServer().getPluginManager().registerEvents(new PvPListener(this, pvpManager, settings), this);
         getServer().getPluginManager().registerEvents(new CooldownListener(this, cooldownManager, pvpManager, settings), this);
+        getServer().getPluginManager().registerEvents(new DirtyListener(this), this);
     }
 
     @Override

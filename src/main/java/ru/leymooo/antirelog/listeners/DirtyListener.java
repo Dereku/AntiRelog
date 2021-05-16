@@ -32,12 +32,15 @@ public class DirtyListener implements Listener {
         if (!matcher.matches()) {
             return;
         }
-        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("antirelog.punishmentbypass")) {
-            return;
-        }
 
         final Player player = this.plugin.getServer().getPlayer(matcher.group(3));
         if (player == null) {
+            return;
+        }
+        if (event.getPlayer().isOp() || event.getPlayer().hasPermission("antirelog.punishmentbypass")) {
+            if (this.plugin.getPvpManager().isInPvP(player)) {
+                this.plugin.getPvpManager().stopPvP(player);
+            }
             return;
         }
 
